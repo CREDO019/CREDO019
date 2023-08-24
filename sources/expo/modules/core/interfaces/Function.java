@@ -1,0 +1,6 @@
+package expo.modules.core.interfaces;
+
+/* loaded from: classes4.dex */
+public interface Function<T, R> {
+    R apply(T t);
+}

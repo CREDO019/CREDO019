@@ -1,0 +1,71 @@
+package p042rx.internal.operators;
+
+import p042rx.Observable;
+import p042rx.Subscriber;
+import p042rx.exceptions.AssemblyStackTraceException;
+
+/* renamed from: rx.internal.operators.OnSubscribeOnAssembly */
+/* loaded from: classes6.dex */
+public final class OnSubscribeOnAssembly<T> implements Observable.OnSubscribe<T> {
+    public static volatile boolean fullStackTrace;
+    final Observable.OnSubscribe<T> source;
+    final String stacktrace = createStacktrace();
+
+    @Override // p042rx.functions.Action1
+    public /* bridge */ /* synthetic */ void call(Object obj) {
+        call((Subscriber) ((Subscriber) obj));
+    }
+
+    public OnSubscribeOnAssembly(Observable.OnSubscribe<T> onSubscribe) {
+        this.source = onSubscribe;
+    }
+
+    /* JADX INFO: Access modifiers changed from: package-private */
+    public static String createStacktrace() {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        StringBuilder sb = new StringBuilder("Assembly trace:");
+        for (StackTraceElement stackTraceElement : stackTrace) {
+            String stackTraceElement2 = stackTraceElement.toString();
+            if (fullStackTrace || (stackTraceElement.getLineNumber() > 1 && !stackTraceElement2.contains("RxJavaHooks.") && !stackTraceElement2.contains("OnSubscribeOnAssembly") && !stackTraceElement2.contains(".junit.runner") && !stackTraceElement2.contains(".junit4.runner") && !stackTraceElement2.contains(".junit.internal") && !stackTraceElement2.contains("sun.reflect") && !stackTraceElement2.contains("java.lang.Thread.") && !stackTraceElement2.contains("ThreadPoolExecutor") && !stackTraceElement2.contains("org.apache.catalina.") && !stackTraceElement2.contains("org.apache.tomcat."))) {
+                sb.append("\n at ");
+                sb.append(stackTraceElement2);
+            }
+        }
+        sb.append("\nOriginal exception:");
+        return sb.toString();
+    }
+
+    public void call(Subscriber<? super T> subscriber) {
+        this.source.call(new OnAssemblySubscriber(subscriber, this.stacktrace));
+    }
+
+    /* JADX INFO: Access modifiers changed from: package-private */
+    /* renamed from: rx.internal.operators.OnSubscribeOnAssembly$OnAssemblySubscriber */
+    /* loaded from: classes6.dex */
+    public static final class OnAssemblySubscriber<T> extends Subscriber<T> {
+        final Subscriber<? super T> actual;
+        final String stacktrace;
+
+        public OnAssemblySubscriber(Subscriber<? super T> subscriber, String str) {
+            super(subscriber);
+            this.actual = subscriber;
+            this.stacktrace = str;
+        }
+
+        @Override // p042rx.Observer
+        public void onCompleted() {
+            this.actual.onCompleted();
+        }
+
+        @Override // p042rx.Observer
+        public void onError(Throwable th) {
+            new AssemblyStackTraceException(this.stacktrace).attachTo(th);
+            this.actual.onError(th);
+        }
+
+        @Override // p042rx.Observer
+        public void onNext(T t) {
+            this.actual.onNext(t);
+        }
+    }
+}

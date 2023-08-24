@@ -1,0 +1,143 @@
+package com.amplitude.api;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/* loaded from: classes.dex */
+public class Revenue {
+    private static final String TAG = "com.amplitude.api.Revenue";
+    private static AmplitudeLog logger = AmplitudeLog.getLogger();
+    protected String productId = null;
+    protected int quantity = 1;
+    protected Double price = null;
+    protected String revenueType = null;
+    protected String receipt = null;
+    protected String receiptSig = null;
+    protected JSONObject properties = null;
+
+    /* JADX INFO: Access modifiers changed from: protected */
+    public boolean isValidRevenue() {
+        if (this.price == null) {
+            logger.m1362w(TAG, "Invalid revenue, need to set price");
+            return false;
+        }
+        return true;
+    }
+
+    public Revenue setProductId(String str) {
+        if (C1060Utils.isEmptyString(str)) {
+            logger.m1362w(TAG, "Invalid empty productId");
+            return this;
+        }
+        this.productId = str;
+        return this;
+    }
+
+    public Revenue setQuantity(int r1) {
+        this.quantity = r1;
+        return this;
+    }
+
+    public Revenue setPrice(double d) {
+        this.price = Double.valueOf(d);
+        return this;
+    }
+
+    public Revenue setRevenueType(String str) {
+        this.revenueType = str;
+        return this;
+    }
+
+    public Revenue setReceipt(String str, String str2) {
+        this.receipt = str;
+        this.receiptSig = str2;
+        return this;
+    }
+
+    public Revenue setRevenueProperties(JSONObject jSONObject) {
+        logger.m1362w(TAG, "setRevenueProperties is deprecated, please use setEventProperties instead");
+        return setEventProperties(jSONObject);
+    }
+
+    public Revenue setEventProperties(JSONObject jSONObject) {
+        this.properties = C1060Utils.cloneJSONObject(jSONObject);
+        return this;
+    }
+
+    /* JADX INFO: Access modifiers changed from: protected */
+    public JSONObject toJSONObject() {
+        JSONObject jSONObject = this.properties;
+        if (jSONObject == null) {
+            jSONObject = new JSONObject();
+        }
+        try {
+            jSONObject.put(Constants.AMP_REVENUE_PRODUCT_ID, this.productId);
+            jSONObject.put(Constants.AMP_REVENUE_QUANTITY, this.quantity);
+            jSONObject.put(Constants.AMP_REVENUE_PRICE, this.price);
+            jSONObject.put(Constants.AMP_REVENUE_REVENUE_TYPE, this.revenueType);
+            jSONObject.put(Constants.AMP_REVENUE_RECEIPT, this.receipt);
+            jSONObject.put(Constants.AMP_REVENUE_RECEIPT_SIG, this.receiptSig);
+        } catch (JSONException e) {
+            logger.m1368e(TAG, String.format("Failed to convert revenue object to JSON: %s", e.toString()));
+        }
+        return jSONObject;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Revenue revenue = (Revenue) obj;
+        if (this.quantity != revenue.quantity) {
+            return false;
+        }
+        String str = this.productId;
+        if (str == null ? revenue.productId == null : str.equals(revenue.productId)) {
+            Double d = this.price;
+            if (d == null ? revenue.price == null : d.equals(revenue.price)) {
+                String str2 = this.revenueType;
+                if (str2 == null ? revenue.revenueType == null : str2.equals(revenue.revenueType)) {
+                    String str3 = this.receipt;
+                    if (str3 == null ? revenue.receipt == null : str3.equals(revenue.receipt)) {
+                        String str4 = this.receiptSig;
+                        if (str4 == null ? revenue.receiptSig == null : str4.equals(revenue.receiptSig)) {
+                            JSONObject jSONObject = this.properties;
+                            JSONObject jSONObject2 = revenue.properties;
+                            if (jSONObject != null) {
+                                if (C1060Utils.compareJSONObjects(jSONObject, jSONObject2)) {
+                                    return true;
+                                }
+                            } else if (jSONObject2 == null) {
+                                return true;
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public int hashCode() {
+        String str = this.productId;
+        int hashCode = (((str != null ? str.hashCode() : 0) * 31) + this.quantity) * 31;
+        Double d = this.price;
+        int hashCode2 = (hashCode + (d != null ? d.hashCode() : 0)) * 31;
+        String str2 = this.revenueType;
+        int hashCode3 = (hashCode2 + (str2 != null ? str2.hashCode() : 0)) * 31;
+        String str3 = this.receipt;
+        int hashCode4 = (hashCode3 + (str3 != null ? str3.hashCode() : 0)) * 31;
+        String str4 = this.receiptSig;
+        int hashCode5 = (hashCode4 + (str4 != null ? str4.hashCode() : 0)) * 31;
+        JSONObject jSONObject = this.properties;
+        return hashCode5 + (jSONObject != null ? jSONObject.hashCode() : 0);
+    }
+}
