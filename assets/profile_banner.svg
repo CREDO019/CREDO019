@@ -1,0 +1,23 @@
+<svg width="1440" height="360" viewBox="0 0 1440 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1440" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="0.55" stop-color="#111827"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="190" y1="94" x2="1220" y2="278" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="360" rx="28" fill="url(#bg)"/>
+  <circle cx="1300" cy="30" r="210" stroke="#38BDF8" stroke-opacity="0.16" stroke-width="2"/>
+  <circle cx="1300" cy="30" r="158" stroke="#818CF8" stroke-opacity="0.14" stroke-width="2"/>
+  <circle cx="1300" cy="30" r="104" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="2"/>
+  <path d="M0 282C224 204 334 348 567 268C799 188 887 268 1077 222C1220 188 1317 168 1440 198V360H0V282Z" fill="#2563EB" fill-opacity="0.08"/>
+  <path d="M0 312C198 252 355 344 530 306C715 266 848 310 1024 278C1191 248 1308 246 1440 266" stroke="url(#accent)" stroke-opacity="0.28" stroke-width="2"/>
+  <rect x="106" y="91" width="66" height="6" rx="3" fill="url(#accent)"/>
+  <text x="106" y="166" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="700" letter-spacing="2">EMIRHAN OZKAYA</text>
+  <text x="110" y="218" fill="#CBD5E1" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="400" letter-spacing="4">SOFTWARE DEVELOPER</text>
+  <text x="110" y="276" fill="#93C5FD" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" letter-spacing="2">MOBILE PRODUCTS  ·  BACKEND SYSTEMS  ·  APPLIED AI</text>
+</svg>
