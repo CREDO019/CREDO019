@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/profile_banner.svg" alt="Emirhan Ozkaya - Software Developer" width="100%" />
+  <img src="./assets/profile_banner.svg" alt="Emirhan Özkaya - Software Developer" width="100%" />
 </p>
 
 <p align="center">
